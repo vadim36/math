@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
-#include <limits.h>
 
 void read_input(int* pa, int* pb);
 int gcdRecursive(int a, int b) {
@@ -25,20 +24,31 @@ int gcdLoop(int a, int b) {
 
 int main() {
     int a, b;
-    read_input(&a, &b);
-    assert(b != 0);
-    int gcdResRecursive = gcdRecursive(a, b);
-    int gcdResLoop = gcdLoop(a, b);
-    printf("Recursive gcd is %d and loop gcd is %d\n", gcdResRecursive, gcdResLoop);
+    int gcdResRecursive;
+    int gcdResLoop;
+
+    read_input(&a, &b); 
+    while (a != 0) {
+        assert(b != 0);
+        printf("Numbers are %d and %d\n", a, b);
+        gcdResRecursive = gcdRecursive(a, b);
+        gcdResLoop = gcdLoop(a, b);
+        printf("Recursive gcd is %d and loop gcd is %d\n", gcdResRecursive, gcdResLoop);
+        read_input(&a, &b);
+    }
+
     return 0;
 }
 
-void read_input(int* pa, int* pb) {
+void read_user_input(int *pa, int *pb) {
     printf("Enter the numbers: ");
+    read_input(pa, pb);
+}
+
+void read_input(int* pa, int* pb) {
     int nitems = scanf("%d%d", pa, pb);
     if (nitems != 2 || *pb == 0) {
         printf("Error: Invalid Input\n");
         abort();
     }
-    printf("Numbers are %d and %d\n", *pa, *pb);
 }
